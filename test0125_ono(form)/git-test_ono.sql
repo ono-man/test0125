@@ -1,3 +1,5 @@
+DELETE DATABASE Git-test;
+
 CREATE DATABASE Git-test;
 USE Git-test;
 
@@ -8,5 +10,7 @@ CREATE TABLE `comments` (
   `message` varchar(400) NOT NULL,
   `created` datetime NOT NULL
 );
+
+DEFAULT CHARSET=utf8;
 
 INSERT INTO `comments` (`no`, `name`, `address`, `message`, `created`) VALUES
