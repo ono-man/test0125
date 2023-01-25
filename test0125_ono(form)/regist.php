@@ -46,7 +46,7 @@ if (!$con) {
 ?>
     <h1>メッセージの投稿ありがとうございました！</h1>
     
-    <h2><a href="index.php">一覧へ戻る</a></h2>
+    <h2><a href="index.html">一覧へ戻る</a></h2>
     
 </div>
 

@@ -6,10 +6,10 @@
     <link rel="stylesheet" href="css/style.css">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>セルフインフォ</title>
+    <title>改良掲示板</title>
 </head>
 <body>
-    <h1>「Git・PHP・SQLテスト課題」</h1>
+    <h1>「Ajaxテスト課題」</h1>
     <section id="intro">
         <h2>＜プロフィール＞</h2>
         <h2>かっぱ太郎</h2>
@@ -41,44 +41,55 @@
 
     <section id="comment">
         <h2>↓みんなのコメント↓</h2>
-        
-<?php
+        投稿ナンバーを入力:<input type="number" class="kensaku_no">
 
-try {
-  $pdo = new PDO('mysql:dbname=git-test;host=127.0.0.1', 'root', 'aoikokoro');
-} catch (PDOException $e) {
-  exit('データベースに接続できませんでした。'.$e->getMessage());
-}
+        <div class="result">
+            <p>番号を入力してボタンを押して！</p>
+        </div>
+        <input type="button" class="ajax" value="選んだ投稿NO.のコメントを表示！！！">
+    </section>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+      $(function(){
+        //.ajaxをクリックしてajax通信を行う
+        $('.ajax').click(function(){
+            $.ajax({
+                url: '/test0125_ono(form)/test.php',
+                type: 'POST',
+                /* json形式で受け取るためdataTypeを変更 */
+                dataType: 'json',
+                data : {
+                    'id' : $('.kensaku_no').val()
+                    // no : $('[name="no"]').val(),
+                    // name : $('[name="name"]').val(),
+                    // message : $('[name="message"]').val()
+                    // created : $('[name="created"]').val()
+                }
+            }).done(function(data){
+                $('.result').html("<p>投稿番号"+data[0].no+"は「"+data[0].name+"」さんです。<br>コメントは「"+data[0].message+"」です。</p>");
+                console.log('通信成功');
+                console.log(data);
+                /* 通信成功時 */
+                // var html_response = '<ul>';
+                // //json形式で受け取った配列を.each()で繰り返し、ul > liリストにする
+                // $.each(data, function(key, value){
+                //     html_response += '<li>' + value + '</li>';
+                // });
+                // html_response += '</ul>';
+                // $('.result').html(html_response); //取得したHTMLを.resultに反映
+                
+            }).fail(function(data){
+                /* 通信失敗時 */
+                alert('通信失敗！');
+                        
+            });
+        });
+    });
+</script>
+    
 
-$stmt = $pdo->query('SET NAMES utf8');
-if (!$stmt) {
-  $info = $pdo->errorinfo();
-  exit($info[2]);
-}
-
-$stmt = $pdo->query('SELECT * FROM comments ORDER BY no DESC LIMIT 15');
-if (!$stmt) {
-  $info = $pdo->errorinfo();
-  exit($info[2]);
-}
-
-while ($data = $stmt->fetch(PDO::FETCH_ASSOC)){
-  echo "<form action='delete.php' method='post'>\n";
-  echo '<strong>[No.' . $data['no'] . '] ' . $data['created'] . "</strong><br />\n";
-  echo "<p>\n";
-  echo nl2br(htmlspecialchars($data['message'], ENT_QUOTES));
-  echo "</p><input type='submit' name='reset' value='削除'>↑該当記事の削除↑</input>\n";
-  echo "</p><input type='hidden' name='ID' value='".$data['no']."'></input>\n";
-  echo "</form><br />\n";
-}
-
-$pdo = null;
-
-?>
-
-        
     </section>    
 
-    <h2><a href="index.php">Topへ戻る</a></h2>
+    <h2><a href="index.html">Topへ戻る</a></h2>
 </body>
 </html>
