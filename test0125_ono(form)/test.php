@@ -8,6 +8,7 @@ try {
   exit('データベースに接続できませんでした。'.$e->getMessage());
 }
 
+
 $sql = "SELECT no, name, message FROM comments WHERE no = ?";
 $stmt = ($pdo->prepare($sql));
 $stmt->execute(array($no));
@@ -17,7 +18,7 @@ while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
  $memberList[]=array(
   'no' =>$row['no'],
   'name'=>$row['name'],
-  'message'=>$row['message']
+  'comment'=>$row['message']
  );
 }
 
