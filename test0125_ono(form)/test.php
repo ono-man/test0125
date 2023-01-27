@@ -8,6 +8,7 @@ try {
   exit('データベースに接続できませんでした。'.$e->getMessage());
 }
 
+
 $sql = "SELECT no, name, message FROM comments WHERE no = ?";
 $stmt = ($pdo->prepare($sql));
 $stmt->execute(array($no));
