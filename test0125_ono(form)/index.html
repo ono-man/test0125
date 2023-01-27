@@ -66,7 +66,7 @@
                     // created : $('[name="created"]').val()
                 }
             }).done(function(data){
-                $('.result').html("<p>投稿番号"+data[0].no+"は「"+data[0].name+"」さんです。<br>コメントは「"+data[0].comment+"」です。</p>");
+                $('.result').html("<p>投稿番号"+data[0].no+"は「"+data[0].name+"」さんです。<br>コメントは「"+data[0].message+"」です。</p>");
                 console.log('通信成功');
                 console.log(data);
                 /* 通信成功時 */

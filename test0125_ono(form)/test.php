@@ -18,7 +18,7 @@ while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
  $memberList[]=array(
   'no' =>$row['no'],
   'name'=>$row['name'],
-  'comment'=>$row['message']
+  'message'=>$row['message']
  );
 }
 
