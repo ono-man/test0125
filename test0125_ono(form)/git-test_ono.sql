@@ -1,5 +1,7 @@
+
 CREATE DATABASE `Git-test`;
 USE `Git-test`;
+
 
 CREATE TABLE `comments` (
   `no` int(11) NOT NULL,
@@ -9,7 +11,6 @@ CREATE TABLE `comments` (
   `created` datetime NOT NULL
 )
 
--- DEFAULT CHARSET=utf8;
 
 ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -34,4 +35,5 @@ ALTER TABLE `comments`
 ALTER TABLE `comments`
   MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 COMMIT;
+
 
